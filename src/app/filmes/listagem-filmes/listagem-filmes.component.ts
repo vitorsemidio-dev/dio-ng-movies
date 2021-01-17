@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { FilmeService } from './../../core/filme.service';
+
+import { Filme } from './../../shared/model/filme';
 
 @Component({
   selector: 'dio-listagem-filmes',
@@ -6,9 +11,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listagem-filmes.component.scss'],
 })
 export class ListagemFilmesComponent implements OnInit {
-  constructor() {}
+  filmes: Observable<Filme[]>;
+  imgDefault = 'assets/images/angular-material-post.png';
 
-  ngOnInit() {}
+  constructor(private filmeService: FilmeService) {}
+
+  ngOnInit() {
+    this.carregarFilmes();
+  }
 
   open() {}
+
+  carregarFilmes() {
+    this.filmes = this.filmeService.listar();
+  }
 }
