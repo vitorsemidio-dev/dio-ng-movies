@@ -1,1 +1,24 @@
-<p>input-number works!</p>
+<div [formGroup]="formGroup">
+  <mat-form-field class="full-width">
+    <input
+      matInput
+      [name]="controlName"
+      [formControlName]="controlName"
+      [placeholder]="titulo"
+      type="number"
+      min="0"
+      max="10"
+      step="0.1"
+    />
+
+    <mat-error *ngIf="validarCampo(formControl, 'required')">
+      Nota é obrigatória
+    </mat-error>
+    <mat-error *ngIf="validarCampo(formControl, 'min')">
+      A nota precisa ser maior ou igual a 0
+    </mat-error>
+    <mat-error *ngIf="validarCampo(formControl, 'max')">
+      A nota não pode ultrapassar o valor 10
+    </mat-error>
+  </mat-form-field>
+</div>

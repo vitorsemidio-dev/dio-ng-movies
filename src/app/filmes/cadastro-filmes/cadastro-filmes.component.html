@@ -58,7 +58,14 @@
             placeholder="Descrição"
           ></textarea>
         </mat-form-field>
-        <mat-form-field class="full-width">
+
+        <dio-input-number
+          [titulo]="'Nota IMDb *'"
+          [formGroup]="cadastro"
+          [controlName]="'nota'"
+        >
+        </dio-input-number>
+        <!-- <mat-form-field class="full-width">
           <input
             matInput
             name="nota"
@@ -79,7 +86,7 @@
           <mat-error *ngIf="validarCampo(f.nota, 'max')">
             A nota não pode ultrapassar o valor 10
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <dio-input-text
           [titulo]="'Link IMDb'"
@@ -107,7 +114,7 @@
             <mat-option value="Terror">Terror</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-error *ngIf="validarCampo(f.titulo, 'required')">
+        <mat-error *ngIf="validarCampo(f.genero, 'required')">
           Gênero é obrigatório
         </mat-error>
       </mat-card-content>
