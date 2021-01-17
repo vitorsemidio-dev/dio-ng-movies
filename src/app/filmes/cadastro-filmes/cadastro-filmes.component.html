@@ -8,12 +8,18 @@
     >
       <mat-card-content>
         <dio-input-text
-          titulo="Título *"
+          [titulo]="'Título *'"
           controlName="titulo"
           [formGroup]="cadastro"
         ></dio-input-text>
 
-        <mat-form-field class="full-width">
+        <dio-input-text
+          [titulo]="'Link Foto'"
+          controlName="urlFoto"
+          [formGroup]="cadastro"
+        ></dio-input-text>
+
+        <!-- <mat-form-field class="full-width">
           <input
             matInput
             name="urlFoto"
@@ -23,7 +29,8 @@
           <mat-error *ngIf="f.urlFoto.errors?.minlength">
             Campo precisa possuir pelo menos 10 caracteres
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
+
         <mat-form-field class="full-width">
           <input
             readonly
@@ -73,7 +80,13 @@
             A nota não pode ultrapassar o valor 10
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="full-width">
+
+        <dio-input-text
+          [titulo]="'Link IMDb'"
+          controlName="urlIMDb"
+          [formGroup]="cadastro"
+        ></dio-input-text>
+        <!-- <mat-form-field class="full-width">
           <input
             matInput
             name="urlIMDb"
@@ -83,7 +96,8 @@
           <mat-error *ngIf="validarCampo(f.titulo, 'minlength')">
             Campo precisa possuir pelo menos 10 caracteres
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
+
         <mat-form-field class="full-width">
           <mat-select placeholder="Gênero" formControlName="genero">
             <mat-option value="Ação">Açao</mat-option>
