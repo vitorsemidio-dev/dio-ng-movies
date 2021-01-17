@@ -1,1 +1,10 @@
-<p>input-textarea works!</p>
+<div [formGroup]="formGroup">
+  <mat-form-field class="full-width">
+    <textarea
+      matInput
+      [name]="controlName"
+      [formControlName]="controlName"
+      [placeholder]="label"
+    ></textarea>
+  </mat-form-field>
+</div>
