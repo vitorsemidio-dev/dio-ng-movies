@@ -10,10 +10,18 @@
       Título é obrigatório
     </mat-error>
     <mat-error *ngIf="validarCampo(formControl, 'minlength')">
-      Campo precisa possuir pelo menos 2 caracteres
+      Campo precisa possuir pelo menos
+      {{
+        validarCamposService.lengthValidar(formControl, 'minlength')
+      }}
+      caracteres
     </mat-error>
     <mat-error *ngIf="validarCampo(formControl, 'maxlength')">
-      Campo precisa possuir no máximo 256 caracteres
+      Campo precisa possuir no máximo
+      {{
+        validarCamposService.lengthValidar(formControl, 'maxlength')
+      }}
+      caracteres
     </mat-error>
   </mat-form-field>
 </div>

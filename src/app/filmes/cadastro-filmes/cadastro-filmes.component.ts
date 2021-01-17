@@ -35,7 +35,7 @@ export class CadastroFilmesComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(2),
+          Validators.minLength(5),
           Validators.maxLength(256),
         ],
       ],

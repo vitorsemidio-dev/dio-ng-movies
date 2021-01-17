@@ -16,4 +16,14 @@ export class ValidarCamposService {
       (control.dirty || control.touched) && this.hasError(control, errorName)
     );
   }
+
+  lengthValidar(control: AbstractControl, errorName: string): number {
+    const error = control.errors[errorName];
+
+    if (!error) {
+      return 0;
+    }
+
+    return error.requiredLength || error.min || error.max || 0;
+  }
 }

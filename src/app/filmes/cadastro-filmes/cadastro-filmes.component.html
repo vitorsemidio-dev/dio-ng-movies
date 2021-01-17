@@ -36,6 +36,9 @@
           [label]="'Nota IMDb *'"
           [formGroup]="cadastro"
           [controlName]="'nota'"
+          [minValue]="0"
+          [maxValue]="10"
+          [step]="0.1"
         >
         </dio-input-number>
 
