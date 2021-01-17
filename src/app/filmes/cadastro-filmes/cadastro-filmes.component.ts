@@ -11,6 +11,10 @@ export class CadastroFilmesComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
+  get f() {
+    return this.cadastro.controls;
+  }
+
   ngOnInit() {
     this.cadastro = this.fb.group({
       titulo: [

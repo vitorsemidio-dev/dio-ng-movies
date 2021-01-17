@@ -12,8 +12,29 @@
             matInput
             name="titulo"
             formControlName="titulo"
-            placeholder="Título"
+            placeholder="Título *"
           />
+          <mat-error
+            *ngIf="
+              (cadastro.touched || cadastro.dirty) && f.titulo.errors?.required
+            "
+          >
+            Título é obrigatório
+          </mat-error>
+          <mat-error
+            *ngIf="
+              (cadastro.touched || cadastro.dirty) && f.titulo.errors?.minlength
+            "
+          >
+            Campo precisa possuir pelo menos 2 caracteres
+          </mat-error>
+          <mat-error
+            *ngIf="
+              (cadastro.touched || cadastro.dirty) && f.titulo.errors?.maxlength
+            "
+          >
+            Campo precisa possuir no máximo 256 caracteres
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
           <input
@@ -22,15 +43,33 @@
             formControlName="urlFoto"
             placeholder="Link Foto"
           />
+          <mat-error
+            *ngIf="
+              (cadastro.touched || cadastro.dirty) &&
+              f.urlFoto.errors?.minlength
+            "
+          >
+            Campo precisa possuir pelo menos 10 caracteres
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
           <input
+            readonly
             matInput
             name="dtLancamento"
             formControlName="dtLancamento"
             [matDatepicker]="picker"
-            placeholder="Data de Lançamento"
+            placeholder="Data de Lançamento *"
+            (click)="picker.open()"
           />
+          <mat-error
+            *ngIf="
+              (cadastro.touched || cadastro.dirty) &&
+              f.dtLancamento.errors?.required
+            "
+          >
+            A data é obrigatória
+          </mat-error>
           <mat-datepicker-toggle
             matSuffix
             [for]="picker"
@@ -50,12 +89,30 @@
             matInput
             name="nota"
             formControlName="nota"
-            placeholder="Nota IMDb"
+            placeholder="Nota IMDb *"
             type="number"
             min="0"
             max="10"
             step="0.1"
           />
+
+          <mat-error
+            *ngIf="
+              (cadastro.touched || cadastro.dirty) && f.nota.errors?.required
+            "
+          >
+            Nota é obrigatória
+          </mat-error>
+          <mat-error
+            *ngIf="(cadastro.touched || cadastro.dirty) && f.nota.errors?.min"
+          >
+            A nota precisa ser maior ou igual a 0
+          </mat-error>
+          <mat-error
+            *ngIf="(cadastro.touched || cadastro.dirty) && f.nota.errors?.max"
+          >
+            A nota não pode ultrapassar o valor 10
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
           <input
@@ -64,6 +121,13 @@
             formControlName="urlIMDb"
             placeholder="Link IMDb"
           />
+          <mat-error
+            *ngIf="
+              (cadastro.touched || cadastro.dirty) && f.titulo.errors?.minlength
+            "
+          >
+            Campo precisa possuir pelo menos 10 caracteres
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
           <mat-select placeholder="Gênero" formControlName="genero">
@@ -76,6 +140,13 @@
             <mat-option value="Terror">Terror</mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-error
+          *ngIf="
+            (cadastro.touched || cadastro.dirty) && f.titulo.errors?.required
+          "
+        >
+          Gênero é obrigatório
+        </mat-error>
       </mat-card-content>
       <mat-card-actions>
         <button color="accent" type="submit" mat-raised-button>Salvar</button>
