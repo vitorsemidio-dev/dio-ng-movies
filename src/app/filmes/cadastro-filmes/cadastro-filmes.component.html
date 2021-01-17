@@ -8,14 +8,14 @@
     >
       <mat-card-content>
         <dio-input-text
-          [titulo]="'Título *'"
-          controlName="titulo"
+          [label]="'Título *'"
+          [controlName]="'titulo'"
           [formGroup]="cadastro"
         ></dio-input-text>
 
         <dio-input-text
-          [titulo]="'Link Foto'"
-          controlName="urlFoto"
+          [label]="'Link Foto'"
+          [controlName]="'urlFoto'"
           [formGroup]="cadastro"
         ></dio-input-text>
 
@@ -40,7 +40,7 @@
         </dio-input-number>
 
         <dio-input-text
-          [titulo]="'Link IMDb'"
+          [label]="'Link IMDb'"
           controlName="urlIMDb"
           [formGroup]="cadastro"
         ></dio-input-text>

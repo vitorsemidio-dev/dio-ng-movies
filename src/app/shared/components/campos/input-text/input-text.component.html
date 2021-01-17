@@ -4,7 +4,7 @@
       matInput
       [name]="controlName"
       [formControlName]="controlName"
-      [placeholder]="titulo"
+      [placeholder]="label"
     />
     <mat-error *ngIf="validarCampo(formControl, 'required')">
       Título é obrigatório
