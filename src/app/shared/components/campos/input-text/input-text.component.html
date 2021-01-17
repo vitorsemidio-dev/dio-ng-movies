@@ -3,7 +3,7 @@
     <input
       matInput
       [name]="controlName"
-      formControlName="titulo"
+      [formControlName]="controlName"
       [placeholder]="titulo"
     />
     <mat-error *ngIf="validarCampo(formControl, 'required')">
