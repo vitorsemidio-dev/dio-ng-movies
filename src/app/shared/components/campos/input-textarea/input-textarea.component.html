@@ -7,7 +7,7 @@
       [placeholder]="label"
     ></textarea>
     <mat-error *ngIf="validarCampo(formControl, 'required')">
-      {{ controlName }} é obrigatório
+      {{ label }} é obrigatório
     </mat-error>
     <mat-error *ngIf="validarCampo(formControl, 'minlength')">
       Campo precisa possuir pelo menos
