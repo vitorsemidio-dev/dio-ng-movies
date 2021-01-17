@@ -18,7 +18,6 @@
           controlName="urlFoto"
           [formGroup]="cadastro"
         ></dio-input-text>
-
         <!-- <mat-form-field class="full-width">
           <input
             matInput
@@ -31,7 +30,13 @@
           </mat-error>
         </mat-form-field> -->
 
-        <mat-form-field class="full-width">
+        <dio-input-date
+          [controlName]="'dtLancamento'"
+          [formGroup]="cadastro"
+          [label]="'Data de Lançamento *'"
+        >
+        </dio-input-date>
+        <!-- <mat-form-field class="full-width">
           <input
             readonly
             matInput
@@ -49,7 +54,8 @@
             [for]="picker"
           ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+        </mat-form-field> -->
+
         <mat-form-field class="full-width">
           <textarea
             matInput
