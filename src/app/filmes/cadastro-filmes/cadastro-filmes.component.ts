@@ -29,4 +29,16 @@ export class CadastroFilmesComponent implements OnInit {
       genero: ['', [Validators.required]],
     });
   }
+
+  salvar() {
+    if (this.cadastro.invalid) {
+      return;
+    }
+
+    alert(`Sucesso\n\n ${JSON.stringify(this.cadastro.value, null, 4)}`);
+  }
+
+  reiniciarForm() {
+    this.cadastro.reset();
+  }
 }
