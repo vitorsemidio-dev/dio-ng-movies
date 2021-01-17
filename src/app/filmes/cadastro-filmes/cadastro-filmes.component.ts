@@ -6,13 +6,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Alerta } from 'src/app/shared/model/alerta';
+import { Router } from '@angular/router';
 
 import { FilmeService } from './../../core/filme.service';
 
 import { AlertaComponent } from './../../shared/components/alerta/alerta.component';
 import { ValidarCamposService } from './../../shared/components/campos/validar-campos.service';
 
+import { Alerta } from './../../shared/model/alerta';
 import { Filme } from './../../shared/model/filme';
 
 @Component({
@@ -37,6 +38,7 @@ export class CadastroFilmesComponent implements OnInit {
     private fb: FormBuilder,
     private validarCamposService: ValidarCamposService,
     private filmeService: FilmeService,
+    private router: Router,
   ) {}
 
   validarCampo(control: AbstractControl, errorName: string) {
@@ -80,18 +82,17 @@ export class CadastroFilmesComponent implements OnInit {
   private salvar(filme: Filme) {
     this.filmeService.salvar(filme).subscribe({
       next: (filmeResponse) => {
-        this.openDialog();
-        this.cadastro.reset();
+        this.openSuccessDialog();
       },
       error: (err) => {
-        alert('Falha');
+        this.openErrorDialog();
       },
     });
   }
 
-  openDialog(): void {
+  private openSuccessDialog(): void {
     const tituloFilme = this.cadastro.value.titulo;
-    const alertaConfig = {
+    const alertaSuccessConfig = {
       data: {
         titulo: `Filme ${tituloFilme} cadastrado com sucesso`,
         descricao: `Os dados informados sobre o filme ${tituloFilme} foram salvos com sucesso`,
@@ -102,10 +103,27 @@ export class CadastroFilmesComponent implements OnInit {
       } as Alerta,
     };
 
-    const dialogRef = this.dialog.open(AlertaComponent, alertaConfig);
+    const dialogRef = this.dialog.open(AlertaComponent, alertaSuccessConfig);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog fechado com resultado', result);
+      if (result) {
+        this.router.navigate(['/filmes']);
+      } else {
+        this.reiniciarForm();
+      }
     });
+  }
+
+  private openErrorDialog(): void {
+    const alertaErrorConfig = {
+      data: {
+        titulo: `Erro ao salvar o registro`,
+        descricao: `Não conseguimos salvar o seu registro. Tente novamente mais tarde`,
+        btnSuccessText: 'Fechar',
+        btnSuccessColor: 'warn',
+      } as Alerta,
+    };
+
+    this.dialog.open(AlertaComponent, alertaErrorConfig);
   }
 }
