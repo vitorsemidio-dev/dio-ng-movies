@@ -12,14 +12,14 @@
     />
 
     <mat-error *ngIf="validarCampo(formControl, 'required')">
-      {{ controlName }} é obrigatória
+      {{ label }} é obrigatória
     </mat-error>
     <mat-error *ngIf="validarCampo(formControl, 'min')">
-      A {{ controlName }} precisa ser maior ou igual a
+      A {{ label }} precisa ser maior ou igual a
       {{ validarCamposService.lengthValidar(formControl, 'min') }}
     </mat-error>
     <mat-error *ngIf="validarCampo(formControl, 'max')">
-      A {{ controlName }} não pode ultrapassar o valor
+      A {{ label }} não pode ultrapassar o valor
       {{ validarCamposService.lengthValidar(formControl, 'max') }}
     </mat-error>
   </mat-form-field>

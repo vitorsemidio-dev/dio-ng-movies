@@ -10,7 +10,7 @@
       (click)="picker.open()"
     />
     <mat-error *ngIf="validarCampo(formControl, 'required')">
-      A {{ controlName }} é obrigatória
+      A {{ label }} é obrigatória
     </mat-error>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
