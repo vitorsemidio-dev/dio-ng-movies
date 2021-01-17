@@ -5,11 +5,14 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 
 import { FilmeService } from './../../core/filme.service';
 
-import { Filme } from './../../shared/model/filme';
+import { AlertaComponent } from './../../shared/components/alerta/alerta.component';
 import { ValidarCamposService } from './../../shared/components/campos/validar-campos.service';
+
+import { Filme } from './../../shared/model/filme';
 
 @Component({
   selector: 'dio-cadastro-filmes',
@@ -29,6 +32,7 @@ export class CadastroFilmesComponent implements OnInit {
   ];
 
   constructor(
+    public dialog: MatDialog,
     private fb: FormBuilder,
     private validarCamposService: ValidarCamposService,
     private filmeService: FilmeService,
@@ -75,11 +79,28 @@ export class CadastroFilmesComponent implements OnInit {
   private salvar(filme: Filme) {
     this.filmeService.salvar(filme).subscribe({
       next: (filmeResponse) => {
-        alert('Salvo com sucesso');
+        this.openDialog();
+        this.cadastro.reset();
       },
       error: (err) => {
         alert('Falha');
       },
+    });
+  }
+
+  openDialog(): void {
+    const tituloFilme = this.cadastro.value.titulo;
+    const dialogRef = this.dialog.open(AlertaComponent, {
+      width: '250px',
+      data: {
+        titulo: `Filme ${tituloFilme} cadastrado com sucesso`,
+        descricao: `Os dados informados sobre o filme ${tituloFilme} foram salvos com sucesso`,
+        possuiBotaoFechar: true,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Dialog fechado com resultado', result);
     });
   }
 }

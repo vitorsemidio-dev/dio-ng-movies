@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>{{ titulo }}</h1>
+<div mat-dialog-content>
+  <p>
+    {{ descricao }}
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-raised-button
+    [color]="btnSuccessColor"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    {{ btnSuccessText }}
+  </button>
+  <button
+    *ngIf="possuiBtnFechar"
+    mat-raised-button
+    color="warn"
+    [mat-dialog-close]="false"
+  >
+    {{ btnCancelText }}
+  </button>
+</div>
