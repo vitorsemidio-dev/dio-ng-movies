@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 
 import { FilmeService } from './../../core/filme.service';
 
@@ -24,7 +23,7 @@ export class ListagemFilmesComponent implements OnInit {
   open() {}
 
   carregarFilmes() {
-    this.filmeService.listar(this.paginaAtual).subscribe({
+    this.filmeService.listar(this.paginaAtual, 8).subscribe({
       next: (filmesResponse) => this.filmes.push(...filmesResponse),
     });
     this.paginaAtual++;
