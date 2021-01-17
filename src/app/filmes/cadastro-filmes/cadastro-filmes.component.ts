@@ -15,15 +15,20 @@ import { ValidarCamposService } from './../../shared/components/campos/validar-c
 })
 export class CadastroFilmesComponent implements OnInit {
   cadastro: FormGroup;
+  generos = [
+    'Ação',
+    'Aventura',
+    'Comédia',
+    'Drama',
+    'Ficção Científica',
+    'Romance',
+    'Terror',
+  ];
 
   constructor(
     private fb: FormBuilder,
     private validarCamposService: ValidarCamposService,
   ) {}
-
-  get f() {
-    return this.cadastro.controls;
-  }
 
   validarCampo(control: AbstractControl, errorName: string) {
     return this.validarCamposService.hasErrorValidation(control, errorName);
