@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Alerta } from 'src/app/shared/model/alerta';
 
 import { FilmeService } from './../../core/filme.service';
 
@@ -90,14 +91,18 @@ export class CadastroFilmesComponent implements OnInit {
 
   openDialog(): void {
     const tituloFilme = this.cadastro.value.titulo;
-    const dialogRef = this.dialog.open(AlertaComponent, {
-      width: '250px',
+    const alertaConfig = {
       data: {
         titulo: `Filme ${tituloFilme} cadastrado com sucesso`,
         descricao: `Os dados informados sobre o filme ${tituloFilme} foram salvos com sucesso`,
         possuiBtnFechar: true,
-      },
-    });
+        btnSuccessText: 'Ir para listagem',
+        btnCancelText: 'Cadastrar um novo filme',
+        btnCancelColor: 'primary',
+      } as Alerta,
+    };
+
+    const dialogRef = this.dialog.open(AlertaComponent, alertaConfig);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('Dialog fechado com resultado', result);
