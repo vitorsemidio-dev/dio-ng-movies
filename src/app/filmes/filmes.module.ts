@@ -7,12 +7,7 @@ import { MaterialModule } from '../shared/material/material.module';
 import { ListagemFilmesComponent } from './listagem-filmes/listagem-filmes.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    FormsModule,
-  ],
-  declarations: [CadastroFilmesComponent, ListagemFilmesComponent]
+  imports: [CommonModule, MaterialModule, ReactiveFormsModule, FormsModule],
+  declarations: [CadastroFilmesComponent, ListagemFilmesComponent],
 })
-export class FilmesModule { }
+export class FilmesModule {}
