@@ -4,17 +4,14 @@ import { MatSidenav } from '@angular/material/sidenav';
 @Component({
   selector: 'dio-topo',
   templateUrl: './topo.component.html',
-  styleUrls: ['./topo.component.scss']
+  styleUrls: ['./topo.component.scss'],
 })
 export class TopoComponent implements OnInit {
-  @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
+  @ViewChild('sidenav', { static: false }) sidenav: MatSidenav;
 
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 
   openSideNav() {
     this.sidenav.open();
@@ -23,6 +20,4 @@ export class TopoComponent implements OnInit {
   closeSideNav() {
     this.sidenav.close();
   }
-
-
 }
