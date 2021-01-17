@@ -1,44 +1,67 @@
 <mat-toolbar class="app-title">Cadastrar Filme</mat-toolbar>
 <div class="main-div">
   <mat-card class="center width50">
-    <mat-card-content>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Título" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Link Foto" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input
-          matInput
-          [matDatepicker]="picker"
-          placeholder="Data de Lançamento"
-        />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <textarea matInput placeholder="Descrição"></textarea>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Nota IMDb" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Link IMDb" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <mat-select placeholder="Gênero">
-          <mat-option value="Ação">Açao</mat-option>
-          <mat-option value="Aventura">Aventura</mat-option>
-          <mat-option value=">Ficção Científica">Ficção Científica</mat-option>
-          <mat-option value="Romance">Romance</mat-option>
-          <mat-option value="Terror">Terror</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-card-content>
-    <mat-card-actions>
-      <button color="accent" mat-raised-button>Salvar</button>
-      <button color="warn" mat-raised-button>Cancelar</button>
-    </mat-card-actions>
+    <form
+      autocomplete="off"
+      novalidate
+      [formGroup]="cadastro"
+      (ngSubmit)="salvar()"
+      (ngReset)="reiniciarForm()"
+    >
+      <mat-card-content>
+        <dio-input-text
+          [label]="'Título *'"
+          [controlName]="'titulo'"
+          [formGroup]="cadastro"
+        ></dio-input-text>
+
+        <dio-input-text
+          [label]="'Link Foto'"
+          [controlName]="'urlFoto'"
+          [formGroup]="cadastro"
+        ></dio-input-text>
+
+        <dio-input-date
+          [controlName]="'dtLancamento'"
+          [formGroup]="cadastro"
+          [label]="'Data de Lançamento *'"
+        >
+        </dio-input-date>
+
+        <dio-input-textarea
+          [controlName]="'descricao'"
+          [formGroup]="cadastro"
+          [label]="'Descrição'"
+        ></dio-input-textarea>
+
+        <dio-input-number
+          [label]="'Nota IMDb *'"
+          [formGroup]="cadastro"
+          [controlName]="'nota'"
+          [minValue]="0"
+          [maxValue]="10"
+          [step]="0.1"
+        >
+        </dio-input-number>
+
+        <dio-input-text
+          [label]="'Link IMDb'"
+          controlName="urlIMDb"
+          [formGroup]="cadastro"
+        ></dio-input-text>
+
+        <dio-input-select
+          [formGroup]="cadastro"
+          [controlName]="'genero'"
+          [label]="'Gênero'"
+          [options]="generos"
+        >
+        </dio-input-select>
+      </mat-card-content>
+      <mat-card-actions>
+        <button color="accent" type="submit" mat-raised-button>Salvar</button>
+        <button color="warn" type="reset" mat-raised-button>Cancelar</button>
+      </mat-card-actions>
+    </form>
   </mat-card>
 </div>
