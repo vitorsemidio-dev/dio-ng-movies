@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -18,6 +19,7 @@ import { RodapeComponent } from './shared/components/rodape/rodape.component';
     BrowserAnimationsModule,
     LayoutModule,
     MaterialModule,
+    HttpClientModule,
     AppRoutingModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt' }],

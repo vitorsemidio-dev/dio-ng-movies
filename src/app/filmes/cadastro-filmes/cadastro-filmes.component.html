@@ -5,7 +5,7 @@
       autocomplete="off"
       novalidate
       [formGroup]="cadastro"
-      (ngSubmit)="salvar()"
+      (ngSubmit)="submit()"
       (ngReset)="reiniciarForm()"
     >
       <mat-card-content>
@@ -53,7 +53,7 @@
         <dio-input-select
           [formGroup]="cadastro"
           [controlName]="'genero'"
-          [label]="'Gênero'"
+          [label]="'Gênero *'"
           [options]="generos"
         >
         </dio-input-select>
