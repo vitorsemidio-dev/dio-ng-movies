@@ -95,7 +95,7 @@ export class CadastroFilmesComponent implements OnInit {
       data: {
         titulo: `Filme ${tituloFilme} cadastrado com sucesso`,
         descricao: `Os dados informados sobre o filme ${tituloFilme} foram salvos com sucesso`,
-        possuiBotaoFechar: true,
+        possuiBtnFechar: true,
       },
     });
 
