@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from './../../environments/environment';
@@ -26,8 +26,15 @@ export class FilmeService {
     return this.httpClient.delete<Filme>(`${this.url}/${id}`);
   }
 
-  listar(): Observable<Filme[]> {
-    return this.httpClient.get<Filme[]>(`${this.url}`);
+  listar(pagina = 0, qtdPagina = 5): Observable<Filme[]> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams
+      .set('_page', pagina.toString())
+      .set('_limit', qtdPagina.toString());
+
+    return this.httpClient.get<Filme[]>(`${this.url}`, {
+      params: httpParams,
+    });
   }
 
   private criar(filme: Filme): Observable<Filme> {

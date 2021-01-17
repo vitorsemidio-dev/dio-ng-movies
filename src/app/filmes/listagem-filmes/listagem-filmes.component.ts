@@ -11,8 +11,9 @@ import { Filme } from './../../shared/model/filme';
   styleUrls: ['./listagem-filmes.component.scss'],
 })
 export class ListagemFilmesComponent implements OnInit {
-  filmes: Observable<Filme[]>;
+  filmes: Filme[] = [];
   imgDefault = 'assets/images/angular-material-post.png';
+  paginaAtual = 0;
 
   constructor(private filmeService: FilmeService) {}
 
@@ -23,6 +24,13 @@ export class ListagemFilmesComponent implements OnInit {
   open() {}
 
   carregarFilmes() {
-    this.filmes = this.filmeService.listar();
+    this.filmeService.listar(this.paginaAtual).subscribe({
+      next: (filmesResponse) => this.filmes.push(...filmesResponse),
+    });
+    this.paginaAtual++;
+  }
+
+  onScroll() {
+    this.carregarFilmes();
   }
 }
