@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Observable } from 'rxjs';
 
 import { FilmeService } from './../../core/filme.service';
 
+import { AlertaComponent } from './../../shared/components/alerta/alerta.component';
+
+import { Alerta } from './../../shared/model/alerta';
 import { Filme } from './../../shared/model/filme';
 
 @Component({
@@ -15,15 +19,58 @@ import { Filme } from './../../shared/model/filme';
 export class VisualizarFilmeComponent implements OnInit {
   filme$: Observable<Filme>;
   imgDefault = 'assets/images/angular-material-post.png';
+  id: number;
 
   constructor(
+    public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private filmeService: FilmeService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.params['id'];
-    this.carregarDadosFilme(id);
+    this.id = this.activatedRoute.snapshot.params['id'];
+    this.carregarDadosFilme(this.id);
+  }
+
+  onDeletar() {
+    this.openDialog();
+  }
+
+  onEditar(filme: Filme) {}
+
+  deletar(id: number) {
+    this.filmeService.deletar(id).subscribe(() => {
+      this.router.navigateByUrl('/filmes');
+    });
+  }
+
+  editar(filme: Filme) {
+    this.filmeService.salvar(filme).subscribe(() => {
+      console.log('Filme salvo com sucesso');
+    });
+  }
+
+  openDialog() {
+    const config = {
+      data: {
+        titulo: 'Deseja realmente excluir?',
+        descricao:
+          'Caso tenha certeza que deseja excluir, clique no botão "Excluir"',
+        btnSuccessText: 'Excluir',
+        btnSuccessColor: 'warn',
+        possuiBtnFechar: true,
+        btnCancelText: 'Cancelar',
+        btnCancelColor: 'primary',
+      } as Alerta,
+    };
+    const dialog = this.dialog.open(AlertaComponent, config);
+
+    dialog.afterClosed().subscribe((confirmacaoExclusao) => {
+      if (confirmacaoExclusao) {
+        this.deletar(this.id);
+      }
+    });
   }
 
   private carregarDadosFilme(id: number) {

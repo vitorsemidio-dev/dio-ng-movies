@@ -30,8 +30,8 @@ export class FilmeService {
     return this.criar(filme);
   }
 
-  deletar(id: number): Observable<Filme> {
-    return this.httpClient.delete<Filme>(`${this.url}/${id}`);
+  deletar(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 
   listar({

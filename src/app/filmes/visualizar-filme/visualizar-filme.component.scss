@@ -1,8 +1,20 @@
+button + button {
+  margin-left: 8px;
+}
+
 .card-detail-container {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 50px 30px;
+}
+
+.action-container {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 0;
+  padding: 8px 16px;
 }
 
 .mat-list-item {

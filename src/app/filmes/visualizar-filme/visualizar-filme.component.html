@@ -19,14 +19,28 @@
         />
       </mat-list-item>
 
-      <a
-        color="accent"
-        mat-raised-button
-        [href]="filme.urlIMDb"
-        target="_blank"
-      >
-        Ver mais informações
-      </a>
+      <mat-card-actions class="action-container">
+        <a
+          color="primary"
+          mat-raised-button
+          [href]="filme.urlIMDb"
+          target="_blank"
+        >
+          Acessar IMDb
+        </a>
+        <div>
+          <button color="accent" mat-mini-fab (click)="onEditar(filme)">
+            <mat-icon aria-hidden="false" aria-label="Editar filme"
+              >edit</mat-icon
+            >
+          </button>
+          <button color="warn" mat-mini-fab (click)="onDeletar(filme)">
+            <mat-icon aria-hidden="false" aria-label="Deletar filme"
+              >delete_outline</mat-icon
+            >
+          </button>
+        </div>
+      </mat-card-actions>
     </mat-list>
   </mat-card>
 </div>
