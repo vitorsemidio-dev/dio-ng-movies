@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { FilmeService } from './../../core/filme.service';
 
@@ -22,6 +22,7 @@ import { Filme } from './../../shared/model/filme';
   styleUrls: ['./cadastro-filmes.component.scss'],
 })
 export class CadastroFilmesComponent implements OnInit {
+  idFilme: number;
   cadastro: FormGroup;
   generos = [
     'Ação',
@@ -39,14 +40,19 @@ export class CadastroFilmesComponent implements OnInit {
     private validarCamposService: ValidarCamposService,
     private filmeService: FilmeService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {}
 
-  validarCampo(control: AbstractControl, errorName: string) {
-    return this.validarCamposService.hasErrorValidation(control, errorName);
+  ngOnInit() {
+    this.idFilme = this.activatedRoute.snapshot.params['id'];
+    this.criarFormulario();
+
+    this.popularDados(this.idFilme);
   }
 
-  ngOnInit() {
+  criarFormulario() {
     this.cadastro = this.fb.group({
+      id: [null],
       titulo: [
         '',
         [
@@ -62,6 +68,20 @@ export class CadastroFilmesComponent implements OnInit {
       urlIMDb: ['', [Validators.minLength(10)]],
       genero: ['', [Validators.required]],
     });
+  }
+
+  popularDados(id: number) {
+    if (!id) return;
+
+    this.filmeService.buscarDetalhe(id).subscribe((filmeResponse) => {
+      this.cadastro.setValue({
+        ...filmeResponse,
+      });
+    });
+  }
+
+  validarCampo(control: AbstractControl, errorName: string) {
+    return this.validarCamposService.hasErrorValidation(control, errorName);
   }
 
   submit() {
@@ -94,8 +114,8 @@ export class CadastroFilmesComponent implements OnInit {
     const tituloFilme = this.cadastro.value.titulo;
     const alertaSuccessConfig = {
       data: {
-        titulo: `Filme ${tituloFilme} cadastrado com sucesso`,
-        descricao: `Os dados informados sobre o filme ${tituloFilme} foram salvos com sucesso`,
+        titulo: `Filme ${tituloFilme} registrado com sucesso`,
+        descricao: `Os dados informados sobre o filme ${tituloFilme} foram salvos.`,
         possuiBtnFechar: true,
         btnSuccessText: 'Ir para listagem',
         btnCancelText: 'Cadastrar um novo filme',
@@ -110,6 +130,7 @@ export class CadastroFilmesComponent implements OnInit {
         this.router.navigate(['/filmes']);
       } else {
         this.reiniciarForm();
+        this.router.navigateByUrl(`/filmes/cadastro`);
       }
     });
   }

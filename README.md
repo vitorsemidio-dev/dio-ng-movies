@@ -1,27 +1,56 @@
-# Curso Intermediário de Angular - Digital Innovation One
+# DIO Ng Movies
 
-Esse curso foi feito para a plataforma [Digital Innovation One](https://digitalinnovation.one/)
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/vitorsemidio-dev/dio-ng-movies?color=%2304D361&style=flat">
 
-O curso consiste em um sistema de filmes, com a possibilidade de cadastros, edições, listagem e visualização dos cursos de outros usuários.
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/vitorsemidio-dev/dio-ng-movies?style=flat">
+  
+  <a href="https://github.com/vitorsemidio-dev/dio-ng-movies/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/vitorsemidio-dev/dio-ng-movies?style=flat">
+  </a>
+    
+   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen?style=flat">
+</p>
 
-## Instalação
+![Listagem de Filmes](.github/lista-filmes.png)
 
-1. clone o repositório `git clone git@github.com:RenanRB/curso-angular.git`
-2. Entre no projeto e instale as dependencias `npm install`
+## Sobre o projeto
 
-## Ambiente Local
+Projeto desenvolvido durante um dos cursos da [Digital Innovation One](https://digitalinnovation.one/). Aulas ministradas por [Renan Rafael](https://github.com/RenanRB)
 
-Execute `ng serve` para que o projeto suba localmente. Acesse a url `http://localhost:4200/`. O projeto já está com reload automático conforme as alterações que você realizar no código
+O projeto consiste em um sistema de filmes, com a possibilidade de cadastros, edições, listagem e visualização dos cursos de outros usuários.
 
-## Simulando o Back-end
+Repositório original: [RenanRB](https://github.com/RenanRB/curso-angular)
 
-Execute `npm install -g json-server` para instalar globalmente o servidor json. Após a instalação entre na pasta do projeto e execute `json-server --watch db.json`, com isso um servidor será inicializado na url `http://localhost:3000/`, após a inicialização sera possível realizar requisições http.
+## 🔥 Como rodar o projeto?
 
-## Gerendo componente
+Clone o repositório
 
-Execute `ng generate component nome-do-componente` para criar um novo componente. Você também pode usuar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+$ git clone https://github.com/vitorsemidio-dev/dio-ng-movies
+```
 
-## Build
+Instale as dependências
 
-Execute `ng build` para gerar o compilado do projeto. O projeto vai ser criado dentro do diretório `dist/`. Adicionar `--prod` junto comando de build para gerar minificado e pronto para o ambiente de produção.
+```
+$ npm install
+```
 
+Inicie o servidor [json-server](https://github.com/typicode/json-server)
+
+```
+$ npm run json-server
+```
+
+Inicie o projeto Angular
+
+```
+$ npm run start
+```
+
+## Tecnologias usadas
+
+- [Angular](https://angular.io/)
+- [Angular Material](https://material.angular.io/)
+- [Json Server](https://github.com/typicode/json-server)
+- [Ngx Infinite Scroll](https://www.npmjs.com/package/ngx-infinite-scroll)

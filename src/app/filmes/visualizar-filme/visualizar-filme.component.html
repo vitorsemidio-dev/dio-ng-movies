@@ -1,0 +1,46 @@
+<div class="card-detail-container">
+  <mat-card style="width: 400px">
+    <mat-list *ngIf="filme$ | async as filme">
+      <mat-list-item> Título: {{ filme.titulo }} </mat-list-item>
+      <mat-list-item>
+        Data de Lançamento: {{ filme.dtLancamento | date: 'dd/MM/yyyy' }}
+      </mat-list-item>
+      <mat-list-item> Gênero: {{ filme.genero }} </mat-list-item>
+      <mat-list-item> Descrição: {{ filme.descricao }} </mat-list-item>
+      <mat-list-item>
+        Nota:
+        {{ filme.nota }}
+      </mat-list-item>
+      <mat-list-item>
+        <img
+          mat-card-image
+          [src]="filme.urlFoto || imgDefault"
+          [alt]="'Pôster de' + filme.titulo"
+        />
+      </mat-list-item>
+
+      <mat-card-actions class="action-container">
+        <a
+          color="primary"
+          mat-raised-button
+          [href]="filme.urlIMDb"
+          target="_blank"
+        >
+          Acessar IMDb
+        </a>
+        <div>
+          <button color="accent" mat-mini-fab (click)="onEditar(filme)">
+            <mat-icon aria-hidden="false" aria-label="Editar filme"
+              >edit</mat-icon
+            >
+          </button>
+          <button color="warn" mat-mini-fab (click)="onDeletar(filme)">
+            <mat-icon aria-hidden="false" aria-label="Deletar filme"
+              >delete_outline</mat-icon
+            >
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-list>
+  </mat-card>
+</div>
