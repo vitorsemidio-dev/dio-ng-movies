@@ -1,11 +1,14 @@
-import { ConfigHttpParamsService } from './config-http-params.service';
-import { ConfigParams } from './../shared/model/config-params';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { environment } from './../../environments/environment';
 
+import { ConfigHttpParamsService } from './config-http-params.service';
+
+import { ConfigParams } from './../shared/model/config-params';
 import { Filme } from './../shared/model/filme';
 
 @Injectable({
@@ -49,11 +52,17 @@ export class FilmeService {
     });
   }
 
+  buscarDetalhe(id: number): Observable<Filme> {
+    return this.httpClient.get<Filme>(`${this.url}/${id}`);
+  }
+
   private criar(filme: Filme): Observable<Filme> {
-    return this.httpClient.post<Filme>(`${this.url}`, filme);
+    return this.httpClient.post<Filme>(`${this.url}`, filme).pipe(take(1));
   }
 
   private editar(filme: Filme): Observable<Filme> {
-    return this.httpClient.post<Filme>(`${this.url}/${filme.id}`, filme);
+    return this.httpClient
+      .post<Filme>(`${this.url}/${filme.id}`, filme)
+      .pipe(take(1));
   }
 }
