@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { debounceTime, filter, map } from 'rxjs/operators';
 
 import { FilmeService } from './../../core/filme.service';
@@ -31,7 +32,11 @@ export class ListagemFilmesComponent implements OnInit {
     'Terror',
   ];
 
-  constructor(private filmeService: FilmeService, private fb: FormBuilder) {}
+  constructor(
+    private filmeService: FilmeService,
+    private fb: FormBuilder,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.carregarFilmes();
@@ -47,7 +52,9 @@ export class ListagemFilmesComponent implements OnInit {
     });
   }
 
-  open() {}
+  abrirDetalheFilme(id: number) {
+    this.router.navigateByUrl(`/filmes/${id}`);
+  }
 
   carregarFilmes() {
     this.configParams.pagina = ++this.paginaAtual;
