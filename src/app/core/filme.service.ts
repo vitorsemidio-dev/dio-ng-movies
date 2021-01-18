@@ -62,7 +62,7 @@ export class FilmeService {
 
   private editar(filme: Filme): Observable<Filme> {
     return this.httpClient
-      .post<Filme>(`${this.url}/${filme.id}`, filme)
+      .put<Filme>(`${this.url}/${filme.id}`, filme)
       .pipe(take(1));
   }
 }
