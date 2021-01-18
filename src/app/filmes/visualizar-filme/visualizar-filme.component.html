@@ -1,3 +1,32 @@
-<h1>
-  {{ filme$ | async | json }}
-</h1>
+<div class="card-detail-container">
+  <mat-card style="width: 400px">
+    <mat-list *ngIf="filme$ | async as filme">
+      <mat-list-item> Título: {{ filme.titulo }} </mat-list-item>
+      <mat-list-item>
+        Data de Lançamento: {{ filme.dtLancamento | date: 'dd/MM/yyyy' }}
+      </mat-list-item>
+      <mat-list-item> Gênero: {{ filme.genero }} </mat-list-item>
+      <mat-list-item> Descrição: {{ filme.descricao }} </mat-list-item>
+      <mat-list-item>
+        Nota:
+        {{ filme.nota }}
+      </mat-list-item>
+      <mat-list-item>
+        <img
+          mat-card-image
+          [src]="filme.urlFoto || imgDefault"
+          [alt]="'Pôster de' + filme.titulo"
+        />
+      </mat-list-item>
+
+      <a
+        color="accent"
+        mat-raised-button
+        [href]="filme.urlIMDb"
+        target="_blank"
+      >
+        Ver mais informações
+      </a>
+    </mat-list>
+  </mat-card>
+</div>

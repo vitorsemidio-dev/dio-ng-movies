@@ -14,6 +14,7 @@ import { Filme } from './../../shared/model/filme';
 })
 export class VisualizarFilmeComponent implements OnInit {
   filme$: Observable<Filme>;
+  imgDefault = 'assets/images/angular-material-post.png';
 
   constructor(
     private activatedRoute: ActivatedRoute,
