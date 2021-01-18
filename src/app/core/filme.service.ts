@@ -1,5 +1,7 @@
+import { ConfigHttpParamsService } from './config-http-params.service';
+import { ConfigParams } from './../shared/model/config-params';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from './../../environments/environment';
@@ -12,7 +14,10 @@ import { Filme } from './../shared/model/filme';
 export class FilmeService {
   private readonly url = environment.apiBaseUrl;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private configHttpParamsService: ConfigHttpParamsService,
+  ) {}
 
   salvar(filme: Filme): Observable<Filme> {
     if (filme.id) {
@@ -26,11 +31,18 @@ export class FilmeService {
     return this.httpClient.delete<Filme>(`${this.url}/${id}`);
   }
 
-  listar(pagina = 0, qtdPagina = 5): Observable<Filme[]> {
-    let httpParams = new HttpParams();
-    httpParams = httpParams
-      .set('_page', pagina.toString())
-      .set('_limit', qtdPagina.toString());
+  listar({
+    pagina = 0,
+    limite = 5,
+    pesquisa,
+    campo,
+  }: ConfigParams): Observable<Filme[]> {
+    let httpParams = this.configHttpParamsService.configurarHttpParams({
+      pagina,
+      limite,
+      pesquisa,
+      campo,
+    });
 
     return this.httpClient.get<Filme[]>(`${this.url}`, {
       params: httpParams,
