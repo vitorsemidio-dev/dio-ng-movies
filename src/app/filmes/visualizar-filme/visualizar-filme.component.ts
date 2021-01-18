@@ -30,6 +30,7 @@ export class VisualizarFilmeComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
+
     this.carregarDadosFilme(this.id);
   }
 
@@ -37,17 +38,13 @@ export class VisualizarFilmeComponent implements OnInit {
     this.openDialog();
   }
 
-  onEditar(filme: Filme) {}
+  onEditar() {
+    this.router.navigateByUrl(`/filmes/cadastro/${this.id}`);
+  }
 
   deletar(id: number) {
     this.filmeService.deletar(id).subscribe(() => {
       this.router.navigateByUrl('/filmes');
-    });
-  }
-
-  editar(filme: Filme) {
-    this.filmeService.salvar(filme).subscribe(() => {
-      console.log('Filme salvo com sucesso');
     });
   }
 
