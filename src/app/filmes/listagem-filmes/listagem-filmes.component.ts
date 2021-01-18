@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { debounceTime, filter, map } from 'rxjs/operators';
 
 import { FilmeService } from './../../core/filme.service';
 
@@ -18,6 +19,7 @@ export class ListagemFilmesComponent implements OnInit {
   filtroListagem: FormGroup;
   configParams: ConfigParams = {
     pagina: this.paginaAtual,
+    limite: 8,
   };
   generos = [
     'Ação',
@@ -65,17 +67,24 @@ export class ListagemFilmesComponent implements OnInit {
   }
 
   filtrar(campo: string) {
-    this.filtroListagem.get(campo).valueChanges.subscribe((valor) => {
-      if (campo === 'pesquisa') {
-        this.configParams.pesquisa = valor;
-      }
-      if (campo === 'genero') {
-        this.configParams.campo = {
-          tipo: 'genero',
-          valor: valor,
-        };
-      }
-      this.resetarFilmes();
-    });
+    this.filtroListagem
+      .get(campo)
+      .valueChanges.pipe(
+        map((value) => value.trim()),
+        filter((value: string) => value.length !== 0 || value.length > 2),
+        debounceTime(300),
+      )
+      .subscribe((valor) => {
+        if (campo === 'pesquisa') {
+          this.configParams.pesquisa = valor;
+        }
+        if (campo === 'genero') {
+          this.configParams.campo = {
+            tipo: 'genero',
+            valor: valor,
+          };
+        }
+        this.resetarFilmes();
+      });
   }
 }

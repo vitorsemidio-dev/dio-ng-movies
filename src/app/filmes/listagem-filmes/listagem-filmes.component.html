@@ -1,30 +1,33 @@
 <mat-toolbar class="app-title">Filmes Cadastrados</mat-toolbar>
-<div class="search-fields">
+<mat-card class="search-fields">
   <form autocomplete="off" novalidate [formGroup]="filtroListagem">
-    <mat-card-content>
-      <dio-input-text
-        [label]="'Pesquise pelo título do filme'"
-        [controlName]="'pesquisa'"
-        [formGroup]="filtroListagem"
-      ></dio-input-text>
-      <dio-input-select
-        [formGroup]="filtroListagem"
-        [controlName]="'genero'"
-        [label]="'Pesquise pelo gênero do filme'"
-        [options]="generos"
-      >
-      </dio-input-select>
-    </mat-card-content>
+    <dio-input-text
+      [label]="'Pesquise pelo título do filme'"
+      [controlName]="'pesquisa'"
+      [formGroup]="filtroListagem"
+    ></dio-input-text>
+    <dio-input-select
+      [formGroup]="filtroListagem"
+      [controlName]="'genero'"
+      [label]="'Pesquise pelo gênero do filme'"
+      [options]="generos"
+    >
+    </dio-input-select>
   </form>
-</div>
-<div class="home-content" infiniteScroll (scrolled)="onScroll()">
+</mat-card>
+<div
+  *ngIf="filmes.length; else semRegistro"
+  class="home-content"
+  infiniteScroll
+  (scrolled)="onScroll()"
+>
   <mat-card *ngFor="let filme of filmes" class="home-card">
     <mat-card-header>
       <mat-card-title>
         {{ filme.titulo }}
       </mat-card-title>
       <mat-card-subtitle>
-        {{ filme.genero }}
+        {{ filme.genero || 'Sem gênero' }}
       </mat-card-subtitle>
     </mat-card-header>
     <img
@@ -33,8 +36,10 @@
       [alt]="'Pôster de' + filme.titulo"
     />
     <mat-card-content>
-      <p>
-        {{ filme.descricao }}
+      <p class="break-line">
+        {{
+          filme.descricao || 'Nenhuma descrição para este título foi informada'
+        }}
       </p>
     </mat-card-content>
     <mat-card-actions>
@@ -42,3 +47,7 @@
     </mat-card-actions>
   </mat-card>
 </div>
+
+<ng-template #semRegistro>
+  <h1 class="full-width text-center">Nenhum registro encontrado</h1>
+</ng-template>
